@@ -4,20 +4,20 @@
 
 - Tool ScreenShots.
 
-   * HASHCat OPTIONS:
+   * HASHCAT OPTIONS:
          ![usage](https://user-images.githubusercontent.com/29546157/47182684-9311ee80-d315-11e8-81ea-c9134c35a3f4.png)
          
-   * HASHCAT Offline-Brute-Force-ATTACK:
+   * HASHCAT: Offline-Brute-Force-ATTACK:
          ![offline-bruteforce](https://user-images.githubusercontent.com/29546157/47182694-9ad19300-d315-11e8-822b-e81fe5a1ef3e.png)
          
-   * HASHCAT Online-Brute-Force-Attack:
+   * HASHCAT: Online-Brute-Force-Attack:
          ![online-bruteforce](https://user-images.githubusercontent.com/29546157/47182698-9dcc8380-d315-11e8-9c20-c85835f20d77.png)
   
-   * File HASHSUM CHECKER:
+   * HASHCAT: File-HASHSUM-CHECKER:
    
         ![check_file_hashsum](https://user-images.githubusercontent.com/29546157/47182707-a1600a80-d315-11e8-82f5-bab1c4011758.png)
         
-   * Create-HASH:
+   * HASHCAT: Create-HASH:
    
        ![create-hash](https://user-images.githubusercontent.com/29546157/46437156-3249ba00-c74a-11e8-9bab-a7e26a175b9d.png)
          
