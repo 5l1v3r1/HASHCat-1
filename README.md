@@ -5,14 +5,18 @@
 - Tool ScreenShots.
 
    * HASHCat OPTIONS:
-         ![usage](https://user-images.githubusercontent.com/29546157/46437116-1d6d2680-c74a-11e8-832c-7275fe76dc7e.png)
+         ![usage](https://user-images.githubusercontent.com/29546157/47182684-9311ee80-d315-11e8-81ea-c9134c35a3f4.png)
          
    * HASHCAT Offline-Brute-Force-ATTACK:
-         ![offline-bruteforce](https://user-images.githubusercontent.com/29546157/46437136-26f68e80-c74a-11e8-8a8b-2ab34eba9a32.png)
+         ![offline-bruteforce](https://user-images.githubusercontent.com/29546157/47182694-9ad19300-d315-11e8-822b-e81fe5a1ef3e.png)
          
    * HASHCAT Online-Brute-Force-Attack:
-         ![online-bruteforce](https://user-images.githubusercontent.com/29546157/46437145-2cec6f80-c74a-11e8-907e-982238f2a951.png)
+         ![online-bruteforce](https://user-images.githubusercontent.com/29546157/47182698-9dcc8380-d315-11e8-9c20-c85835f20d77.png)
   
+   * File HASHSUM CHECKER:
+   
+        ![check_file_hashsum](https://user-images.githubusercontent.com/29546157/47182707-a1600a80-d315-11e8-82f5-bab1c4011758.png)
+        
    * Create-HASH:
    
        ![create-hash](https://user-images.githubusercontent.com/29546157/46437156-3249ba00-c74a-11e8-9bab-a7e26a175b9d.png)
@@ -37,7 +41,7 @@ type this Command:- python HASHCat.py
 
 # Usage:
 
-  - Type This Command:- python HASHCat.py -e for show examples to know how usage :) 
+  - Type This Command:- python HASHCat.py -e/--examples for show examples to know how usage :) 
 
 # THAT'S ALL :)
 
