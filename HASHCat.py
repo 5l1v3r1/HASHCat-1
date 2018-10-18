@@ -26,7 +26,7 @@ except:													   #
 
 #----------------------== VERSION ==-----------------------#
 							   #
-ver = cor[5]+"\nTool Version: [ "+cor[4]+"2.0"+cor[5]+" ]" #
+ver = cor[5]+"\nTool Version: [ "+cor[4]+"2.5"+cor[5]+" ]" #
 							   #
 #----------------------------------------------------------#
 
@@ -51,7 +51,7 @@ ___  / / /__    |_  ___/__  / / /_  ____/_____ ___  __/
 __  /_/ /__  /| |____ \__  /_/ /_  /    _  __ `/_  /   
 _  __  / _  ___ |___/ /_  __  / / /___  / /_/ /_  /    
 /_/ /_/  /_/  |_/____/ /_/ /_/  \____/  \__,_/ /_/     
-                                                 V[2.0]
+                                                 V[2.5]
 """
 #-------------------------------------------------------------------------------------#
 
@@ -67,7 +67,9 @@ parse = optparse.OptionParser(defaultBanner +cor[5]+ """Usage: python ./HASHcat.
 				   +									  +
     -H <HashName> -T <Set Text>    |  Encode Your Text To HASHES[MD5,SHA1,SHA224,SHA256,SHA384,SHA512]	  |
 				   +									  +
-    -O --output <File Name>        |  Save The Resulit IN Output File.                                    |
+    -H <HashName> -F <File Path>   |  Check File HashSum With Hashes[MD5,SHA1,SHA224,SHA256,SHA384,SHA512]|
+                                   +                                                                      +
+    -O --output <File Name>        |  Save The Result IN Output File.                                     |
 ==========================================================================================================+
     -v --version                   |  SHOW TOOL VERSION  ||
 				   +			 ++
@@ -81,16 +83,19 @@ parse = optparse.OptionParser(defaultBanner +cor[5]+ """Usage: python ./HASHcat.
 def main():
 	parse.add_option("-H","--HASH",dest="hash",type="string",
 								help="\nHASH please !\n")
-	parse.add_option("-W","-w","--wordlist",dest="wordlist",type="string",
+	parse.add_option("-W","-w",'--WORDLIST',"--wordlist",dest="wordlist",type="string",
 								help="\nWordlist File Please!\n")
-        parse.add_option("-T","-t","--text",dest="dtext",type="string",
+        parse.add_option("-T","-t","--text",'--TEXT',dest="dtext",type="string",
 							        help="Enter Some Text To Encodeing To Your Hash\n")
-	parse.add_option("--on",'--ON',action="store_true",dest="ONC",default=False)
-	parse.add_option("-O","-o","--output",dest="outfile",type="string",
+	parse.add_option("--on",'--ON','--On','--online','--ONLINE',action="store_true",dest="ONC",default=False)
+
+        parse.add_option('-f','-F','--file','--FILE',dest='Cfile',type='string')
+
+	parse.add_option("-O","-o","--output",'--OUTPUT',dest="outfile",type="string",
 								help="\nFile Name Please !\n")
 	parse.add_option("-v","-V",action="store_true",dest="ShowVERSION",default=False,
 								help="\nSHOW TOOL VERSION AND EXIT :)\n")
-	parse.add_option("-e","-E","--examples",action="store_true",dest="ShowEXAMPLES",default=False,
+	parse.add_option("-e","-E","--examples",'--EXAMPLES',action="store_true",dest="ShowEXAMPLES",default=False,
 								help="\nSHOW TOOL EXAMPLES\n")
 
 	(options,args) = parse.parse_args()
@@ -144,6 +149,7 @@ def main():
 		loop = 1
 		lens = len(file2)
 		try:
+                   system("clear || cls")
                    banner()
 		   print(colors + "\n[+>]<====================> CONFIG <====================>[<+]\n"+cor[5])
 		   print("[*]:HASH NAME    : "+colors+name+cor[5])
@@ -225,6 +231,7 @@ def main():
 		else:
 		   errorhash()
 		   exit(1)
+
 	elif options.hash !=None and options.ONC:
               try:
                 import requests
@@ -265,12 +272,11 @@ def main():
 		print("\033[1;37m.::: \033[1;33mOnline Cracking Result \033[1;37m:::.")
 		print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :\033[1;32m "+H)
 		print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :\033[1;32m "+hashname)
-		print("\n\033[1;37m[\033[1;32m~\033[1;37m] Hash CAT :\033[1;32m "+cracked[0][1])
+		print("\033[1;37m[\033[1;32m~\033[1;37m] Cracked  :\033[1;32m "+cracked[0][1])
 	      except:
 		if test == 1:
 		   exit(1)
                 H = options.hash
-
                 def check():
                   try:
                     ip = socket.gethostbyname('google.com')
@@ -299,11 +305,75 @@ def main():
                 print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :\033[1;32m "+H)
                 print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :\033[1;32m "+name)
 		try:
-                 print("\n\033[1;37m[\033[1;32m~\033[1;37m] Hash CAT :\033[1;32m "+onc(H))
+                 print("\033[1;37m[\033[1;32m~\033[1;37m] Cracked  :\033[1;32m "+onc(H))
 		except:
 		  print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Cracking Failed \033[1;31m !!!\n\033[1;37m[\033[1;32m*\033[1;37m] Try Brute Force Attack With Wordlist :)")
 
-        else:
+	elif options.hash !=None and options.Cfile !=None:
+             hashname = options.hash
+             fname = options.Cfile
+             def HASHme(fname,hashname):
+               try:
+                  test = open(fname, "r")
+               except:
+                 print("\n"+cor[0]+"["+cor[2]+"!"+cor[0]+"][ERROR] "+cor[2]+"! File["+cor[1]+fname+cor[2]+"] Is Not Found "+cor[0]+"!!!")
+                 print(cor[0]+"["+cor[2]+"!"+cor[0]+"]"+cor[1]+" Please Check Your File Location "+cor[4]+"And Try Again "+cor[1]+":)")
+                 exit(1)
+	       hashs = ["md5","MD5","sha1","SHA1","sha224","SHA224","sha256","SHA256","sha384","SHA384","sha512","SHA512"]
+               if hashname in hashs:
+                  try:
+                     if hashname =="md5" or hashname == "MD5":
+                         hash_md5 = hashlib.md5()
+                         with open(fname, "rb") as f:
+                          for chunk in iter(lambda: f.read(4096), b""):
+                             hash_md5.update(chunk)
+                         return hash_md5.hexdigest()
+                     elif hashname =="sha1" or hashname == "SHA1":
+                         hash_sha1 = hashlib.sha1()
+                         with open(fname, "rb") as f:
+                          for chunk in iter(lambda: f.read(4096), b""):
+                              hash_sha1.update(chunk)
+                         return hash_sha1.hexdigest()
+                     elif hashname =="sha224" or hashname == "SHA224":
+                         hash_sha224 = hashlib.sha224()
+                         with open(fname, "rb") as f:
+                            for chunk in iter(lambda: f.read(4096), b""):
+                               hash_sha224.update(chunk)
+                         return hash_sha224.hexdigest()
+		     elif hashname =="sha256" or hashname == "SHA256":
+		      hash_sha256 = hashlib.sha256()
+		      with open(fname, "rb") as f:
+			 for chunk in iter(lambda: f.read(4096), b""):
+			     hash_sha256.update(chunk)
+		      return hash_sha256.hexdigest()
+		     elif hashname =="sha384" or hashname == "SHA384":
+		      hash_sha384 = hashlib.sha384()
+		      with open(fname, "rb") as f:
+			for chunk in iter(lambda: f.read(4096), b""):
+			    hash_sha384.update(chunk)
+		      return hash_sha384.hexdigest()
+		     elif hashname =="sha512" or hashname == "SHA512":
+		      hash_sha512 = hashlib.sha512()
+		      with open(fname, "rb") as f:
+			for chunk in iter(lambda: f.read(4096), b""):
+			    hash_sha512.update(chunk)
+		      return hash_sha512.hexdigest()
+                  except:
+                     print("\n"+cor[2]+"["+cor[0]+"!"+cor[2]+"] Something Went Wrong "+cor[0]+"!!!")
+                     exit(1)
+               else:
+                   errorhash()
+                   exit(1)
+
+             banner()
+             sleep(0.10)
+             print("\n"+cor[2]+"["+cor[0]+"*"+cor[2]+"]"+cor[4]+" Hash: "+cor[1]+hashname)
+             sleep(0.10)
+             print(cor[2]+"["+cor[0]+"*"+cor[2]+"]"+cor[4]+" File: "+cor[1]+fname)
+             sleep(0.10)
+             print("\n"+cor[1]+"["+cor[2]+"*"+cor[1]+"] "+cor[1]+hashname+cor[0]+"sum: "+cor[5]+HASHme(fname,hashname))
+
+	else:
 		print(parse.usage)
 		exit(1)
 
