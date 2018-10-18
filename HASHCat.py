@@ -272,7 +272,7 @@ def main():
 		print("\033[1;37m.::: \033[1;33mOnline Cracking Result \033[1;37m:::.")
 		print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :\033[1;32m "+H)
 		print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :\033[1;32m "+hashname)
-		print("\033[1;37m[\033[1;32m~\033[1;37m] Cracked  :\033[1;32m "+cracked[0][1])
+		print("\n\033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :\033[1;32m "+cracked[0][1])
 	      except:
 		if test == 1:
 		   exit(1)
@@ -305,7 +305,7 @@ def main():
                 print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :\033[1;32m "+H)
                 print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :\033[1;32m "+name)
 		try:
-                 print("\033[1;37m[\033[1;32m~\033[1;37m] Cracked  :\033[1;32m "+onc(H))
+                 print("\n\033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :\033[1;32m "+onc(H))
 		except:
 		  print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Cracking Failed \033[1;31m !!!\n\033[1;37m[\033[1;32m*\033[1;37m] Try Brute Force Attack With Wordlist :)")
 
