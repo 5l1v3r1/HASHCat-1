@@ -7,6 +7,7 @@ try:
    import hashlib,optparse,re,socket
    from time import sleep
    from os import system
+   from copy import copy
    system(" ")
 except:
 	print("\033[91m[!]\033[32m:Some Modules is Missing In Your\033[m [\033[96mPYTHON\033[m].\n\033[96m[*]\033[91m:\033[32mPlease Update Your Python or redownload ")
@@ -57,7 +58,7 @@ _  __  / _  ___ |___/ /_  __  / / /___  / /_/ /_  /
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ MAKE OPTIONS TOOL @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-parse = optparse.OptionParser(defaultBanner +cor[5]+ """Usage: python ./HASHcat.py [Options]
+parse = optparse.OptionParser(defaultBanner +cor[5]+ """Usage: python ./HASHCat.py [OPTIONS]
  _________________________________________________________________________________________________________
 |           OPTIONS:			                   Description:					  |
 +=========================================================================================================+
@@ -152,10 +153,10 @@ def main():
                    system("clear || cls")
                    banner()
 		   print(colors + "\n[+>]<====================> CONFIG <====================>[<+]\n"+cor[5])
-		   print("[*]:HASH NAME    : "+colors+name+cor[5])
-		   print("[+]:HASH         : "+hash[:30]+".....")
-		   print("[+]:Wordlist     : "+wl)
-		   print("[+]:Words Loaded : "+str(lens))
+		   print("\033[1;32m[\033[1;37m*\033[1;32m]\033[1;37m HASH NAME    :> [ \033[1;32m"+colors+name)
+		   print("\033[1;32m[\033[1;37m+\033[1;32m]\033[1;37m HASH         :> [ \033[1;32m"+hash[:30]+"\033[1;33m-...")
+		   print("\033[1;32m[\033[1;37m>\033[1;32m]\033[1;37m Wordlist     :> [ \033[1;32m"+wl)
+		   print("\033[1;32m[\033[1;37m@\033[1;32m]\033[1;37m Words Loaded :> [ \033[1;32m"+str(lens))
 		   sleep(1.2)
 		   print(cor[2]+"\n[*]:"+cor[1]+"Trying["+cor[4]+str(lens)+cor[1]+"] Password From Wordlist File....")
 		   sleep(3.5)
@@ -182,7 +183,8 @@ def main():
 					 outfile = options.outfile
 					 file = open(outfile, "w")
 					 file.write("\n[+]:HASH CRACK!:\n[*]:INFO:\n----------\n[*]:HASH Name:[ "+name+" ]\n[+]:HASH:[ "+hash+" ]\n\n[#>]:HASH CAT:[ "+passwd.strip()+" ]\n")
-					 print(cor[1]+"\n[+]"+cor[4]+":"+cor[2]+"HASH CRACKER: AND The INFO Save In [ "+cor[4]+outfile+cor[2]+" ] output file :)")
+					 print(cor[1]+"\n[+]"+cor[4]+":"+cor[2]+"HASH CRACKER: AND The INFO Save In [ "+cor[4]+outfile+cor[2]+" ] output file :)\n\033[1;32m[\033[1;37m*\033[1;32m] \033[1;37mCheck Out\033[1;32m :)")
+					 file.close()
 					 break
 				else:
 					print(cor[1]+"\n[+]"+cor[4]+":"+cor[2]+"HASH CRACK!:\n"+cor[1]+"[*]"+cor[4]+":"+cor[2]+"INFO:"+cor[5]+"\n----------"+cor[1]+"\n[*]"+cor[4]+":"+cor[2]+"HASH Name:[ "+cor[4]+name+cor[2]+" ] "+cor[1]+"\n[+]"+cor[4]+":"+cor[2]+"HASH:[ "+cor[4]+hash+cor[2]+" ]"+cor[1]+"\n\n[#>]"+cor[4]+":"+cor[2]+"HASH CAT:[ "+cor[4]+passwd.strip()+cor[2]+" ]\n")
@@ -206,13 +208,14 @@ def main():
 		HASHES = ["md5","MD5","sha1","SHA1","sha224","SHA224","sha256","SHA256","sha384","SHA384","sha512","SHA512"]
 		if HASH in HASHES:
 		   sleep(0.10)
+		   banner()
                    print(colors + "\n[+>]<====================> CONFIG <====================>[<+]\n"+cor[5])
                    sleep(0.10)
                    print("[*]:HASH NAME    : "+colors+HASH+cor[5])
                    sleep(0.10)
 		   print("[*]:Text         : "+colors+text+cor[5])
                    sleep(0.10)
-		   print(cor[3]+"\n[*]\033[1;33m Hashing......["+cor[4]+text+"\033[1;33m]")
+		   print(cor[3]+"\n[*]\033[1;33m Hashing......["+cor[4]+text+"\033[1;33m]\n")
 		   sleep(2.1)
 		   if HASH == "md5" or HASH == "MD5":
 			  hashte = hashlib.md5(text).hexdigest()
@@ -226,8 +229,14 @@ def main():
                           hashte = hashlib.sha384(text).hexdigest()
                    elif HASH == "sha512" or HASH == "SHA512":
                           hashte = hashlib.sha512(text).hexdigest()
-                   print("\033[1;33m[T]\033[1;35m TEXT\033[1;32m=[ \033[1;34m {}\033[1;32m ] \033[1;33m[H] \033[1;36m{}\033[1;32mhash\033[1;35m=[ \033[1;31m{}\033[1;35m ]".format(text,HASH,hashte))
-
+		   if check == True:
+			outfile = options.outfile
+			file = open(outfile, "w")
+			file.write("\n[*] ======== [{}]HASH Result========[*]\n |\n[T] Your Plain Text    :> [ {} \n[H] Hash Name Type     :> [ {} \n[E] {}-HASH.[ {} ] :> [ {} \n |\n[*]===================================[*]\n".format(HASH.upper(),text,copy(HASH.upper()),copy(HASH.upper()),copy(text),hashte))
+			print("\n\033[1;32m[\033[1;37m*\033[1;32m] \033[1;37mYour Hashing Result Is Saved In :[\033[1;32m {}\033[1;37m ]\033[1;33m Output File. \n\033[1;32m[\033[1;37m*\033[1;32m]\033[1;37m Check Out \033[1;32m:)".format(outfile))
+			file.close()
+		   else:
+			print("\033[1;33m[T]\033[1;35m Plain TEXT\033[1;32m=[ \033[1;34m {}\033[1;32m ] \033[1;33m\n[H] \033[1;36m{}\033[1;32m-hash\033[1;35m=[ \033[1;31m{}\033[1;35m ]\n".format(text,HASH.upper(),hashte))
 		else:
 		   errorhash()
 		   exit(1)
@@ -251,7 +260,7 @@ def main():
 		HASHES = [32,40,56,64,96,128]
 		if len(H) not in HASHES:
 			errorhash()
-			test = test +1
+			test+=1
 		def check():
 		  try:
 		    ip = socket.gethostbyname('google.com')
@@ -261,7 +270,8 @@ def main():
 			pass
 		  return False
 		if check() !=True:
-			print("\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Please Check Your Internet Connection \033[1;31m!!!")
+			test +=1
+			print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Please Check Your Internet Connection \033[1;31m!!!")
 			exit(1)
 		url="http://hashtoolkit.com/reverse-hash?hash="+H
 		con = requests.get(url)
@@ -270,11 +280,11 @@ def main():
 		hashname=cracked[0][0]
 		banner()
 		print("\033[1;37m.::: \033[1;33mOnline Cracking Result \033[1;37m:::.")
-		print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :\033[1;32m "+H)
-		print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :\033[1;32m "+hashname)
-		print("\n\033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :\033[1;32m "+cracked[0][1])
+		print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :> [\033[1;32m "+H[:30]+"\033[1;33m-...")
+		print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :> [\033[1;32m "+hashname.upper())
+		print("\n\033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :> [\033[1;32m "+cracked[0][1])
 	      except:
-		if test == 1:
+		if test >0:
 		   exit(1)
                 H = options.hash
                 def check():
@@ -286,7 +296,7 @@ def main():
                         pass
                   return False
                 if check() !=True:
-                        print("\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Please Check Your Internet Connection \033[1;31m!!!")
+                        print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Please Check Your Internet Connection \033[1;31m!!!")
                         exit(1)
 		if len(H) ==HASHES[0]:
 			name = "MD5"
@@ -302,10 +312,10 @@ def main():
                         name = "SHA512"
 		banner()
                 print("\033[1;37m .::: \033[1;33mOnline Cracking Result \033[1;37m:::.")
-                print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :\033[1;32m "+H)
-                print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :\033[1;32m "+name)
+                print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :> [\033[1;32m "+H[:30]+"\033[1;33m-...")
+                print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :> [\033[1;32m "+name.upper())
 		try:
-                 print("\n\033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :\033[1;32m "+onc(H))
+                 print("\n\033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :> [\033[1;32m "+onc(H))
 		except:
 		  print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Cracking Failed \033[1;31m !!!\n\033[1;37m[\033[1;32m*\033[1;37m] Try Brute Force Attack With Wordlist :)")
 
