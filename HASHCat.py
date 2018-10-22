@@ -18,8 +18,7 @@ except:
 													   #
 try:													   #
    from Core.banner import banner,colors,cor								   #
-   from Core.examples import examples
-   from Core.api import ONCH as onc									   #
+   from Core.examples import examples									   #
 except:													   #
 	print(cor[3]+"\n[!]:"+cor[5]+"The ["+cor[4]+" Core"+cor[5]+" ]"+cor[3]+"Tool Folder Is Missing!!") #
 	exit()												   #
@@ -202,6 +201,7 @@ def main():
 			       sleep(2)
 			       print("Bye :)")
 			       exit()
+
 	elif options.hash !=None and options.dtext !=None:
 		HASH = options.hash
 		text = options.dtext
@@ -254,6 +254,11 @@ def main():
 	           print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: [\033[1;32m Json \033[1;37mLibrary\033[1;33m ] Is Not Exist \033[1;31m!!!")
 	           print("\033[1;32m[\033[1;37m*\033[1;32m]\033[1;37m Please Install It Using This \033[1;33mCommand: \033[1;37mpip install simplejson")
 		   exit(1)
+	      try:
+		 from Core.api import ONCH as onc
+	      except:
+		 print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: [\033[1;37m Core/api.py \033[1;33m] File Is Missing \033[1;31m !!!")
+		 exit(1)
 	      test = 0
 	      try:
 		H = options.hash
