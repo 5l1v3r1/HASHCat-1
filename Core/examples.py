@@ -1,9 +1,8 @@
 try:
    from banner import banner,cor
-except:
+except ImportError:
       print(cor[4]+"\n[!]:"+cor[3]+"Error: The [ "+cor[4]+"banner.py"+cor[3]+" ]Tool File Is Missing!!")
       exit(1)
-
 def examples():
 	banner()
 	print(cor[5]+"""\n
@@ -33,9 +32,4 @@ def examples():
 
 #[Encode Text]: \033[1;37m./HASHCat.py -H SHA512 -T mypassword\033[1;32m
 ====================================================\033[1;33m
-
-
-
-
 """)
-
