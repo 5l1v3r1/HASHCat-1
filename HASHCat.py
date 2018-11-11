@@ -8,10 +8,10 @@ try:
    from time import sleep
    from os import system
    from copy import copy
-   system(" ")
-except:
+   system("")
+except ImportError:
 	print("\033[91m[!]\033[32m:Some Modules is Missing In Your\033[m [\033[96mPYTHON\033[m].\n\033[96m[*]\033[91m:\033[32mPlease Update Your Python or redownload ")
-	exit()
+	exit(1)
 #------------------------------#
 
 #------------------------------------------ From Core Tool Folder -----------------------------------------#
@@ -19,14 +19,14 @@ except:
 try:													   #
    from Core.banner import banner,colors,cor								   #
    from Core.examples import examples									   #
-except:													   #
+except ImportError:													   #
 	print(cor[3]+"\n[!]:"+cor[5]+"The ["+cor[4]+" Core"+cor[5]+" ]"+cor[3]+"Tool Folder Is Missing!!") #
-	exit()												   #
+	exit(1)												   #
 ############################################################################################################
 
 #----------------------== VERSION ==-----------------------#
 							   #
-ver = cor[5]+"\nTool Version: [ "+cor[4]+"2.5"+cor[5]+" ]" #
+ver = cor[5]+"\nTool Version: [ "+cor[2]+"2.5"+cor[5]+" ]" #
 							   #
 #----------------------------------------------------------#
 
@@ -104,11 +104,12 @@ def main():
 
 	if options.ShowVERSION:
 		print(ver)
-		exit()
+		exit(1)
 
 	elif options.ShowEXAMPLES:
+                system("cls||clear")
 		examples()
-		exit()
+		exit(1)
 
 	def checkoutfile():
 	  try:
@@ -125,11 +126,9 @@ def main():
 		wl = options.wordlist
 		try:
 		   file = open(wl, "r")
-		except:
-		      print(cor[3]+"\n[!]:The [> "+cor[1]+wl+cor[3]+" <] File Not Found!")
-		      exit()
-		file = open(wl, "r")
-		file2 = file.readlines()
+		except IOError:
+		      print(cor[3]+"\n[!] Error:"+cor[5]+" No Such File[ "+cor[4]+wl+cor[5]+" ]"+cor[5]+" !!!")
+		      exit(1)
 		if len(hash) == 32: #MD5
 			name = "MD5"
 		elif len(hash) == 40: #SHA1
@@ -144,35 +143,34 @@ def main():
 			name= "SHA512"
 		else:
 		     errorhash()
-		     exit()
-
+		     exit(1)
 		loop = 1
-		lens = len(file2)
 		try:
-                   system("clear || cls")
+                   system("cls||clear")
                    banner()
 		   print(colors + "\n[+>]<====================> CONFIG <====================>[<+]\n"+cor[5])
 		   print("\033[1;32m[\033[1;37m*\033[1;32m]\033[1;37m HASH NAME    :> [ \033[1;32m"+colors+name)
 		   print("\033[1;32m[\033[1;37m+\033[1;32m]\033[1;37m HASH         :> [ \033[1;32m"+hash[:30]+"\033[1;33m-...")
 		   print("\033[1;32m[\033[1;37m>\033[1;32m]\033[1;37m Wordlist     :> [ \033[1;32m"+wl)
-		   print("\033[1;32m[\033[1;37m@\033[1;32m]\033[1;37m Words Loaded :> [ \033[1;32m"+str(lens))
 		   sleep(1.2)
-		   print(cor[2]+"\n[*]:"+cor[1]+"Trying["+cor[4]+str(lens)+cor[1]+"] Password From Wordlist File....")
-		   sleep(3.5)
-		   for passwd in file2:
-
+		   print(cor[2]+"\n[*]"+cor[5]+" Brute Forcing: "+cor[2]+"Enable"+cor[5]+"...\n")
+		   sleep(1.7)
+		   lines = 0
+		   for passwd in file:
+                           if not passwd.strip(): continue
+                           passwd = passwd.strip()
 			   if len(hash) == 32: #MD5
-			      hashcat = hashlib.md5(passwd.strip()).hexdigest()
+			      hashcat = hashlib.md5(passwd).hexdigest()
 			   elif len(hash) == 40: #SHA1
-		              hashcat = hashlib.sha1(passwd.strip()).hexdigest()
+		              hashcat = hashlib.sha1(passwd).hexdigest()
 		           elif len(hash) == 56: #SHA224
-		              hashcat = hashlib.sha224(passwd.strip()).hexdigest()
+		              hashcat = hashlib.sha224(passwd).hexdigest()
 		           elif len(hash) == 64: #SHA256
-		              hashcat = hashlib.sha256(passwd.strip()).hexdigest()
+		              hashcat = hashlib.sha256(passwd).hexdigest()
 		           elif len(hash) == 96: #SHA384
-		              hashcat = hashlib.sha384(passwd.strip()).hexdigest()
+		              hashcat = hashlib.sha384(passwd).hexdigest()
 		           elif len(hash) == 128: #SHA512
-		              hashcat = hashlib.sha512(passwd.strip()).hexdigest()
+		              hashcat = hashlib.sha512(passwd).hexdigest()
 		           else:
 				errorhash()
 				break
@@ -186,21 +184,23 @@ def main():
 					 file.close()
 					 break
 				else:
+                                        print(cor[2]+"[+]"+cor[5]+" Trying Password"+cor[5]+"["+cor[2]+str(loop)+cor[5]+"]  : "+cor[2]+str(passwd)+cor[5]+" ===>"+cor[2]+" YES")
 					print(cor[1]+"\n[+]"+cor[4]+":"+cor[2]+"HASH CRACK!:\n"+cor[1]+"[*]"+cor[4]+":"+cor[2]+"INFO:"+cor[5]+"\n----------"+cor[1]+"\n[*]"+cor[4]+":"+cor[2]+"HASH Name:[ "+cor[4]+name+cor[2]+" ] "+cor[1]+"\n[+]"+cor[4]+":"+cor[2]+"HASH:[ "+cor[4]+hash+cor[2]+" ]"+cor[1]+"\n\n[#>]"+cor[4]+":"+cor[2]+"HASH CAT:[ "+cor[4]+passwd.strip()+cor[2]+" ]\n")
 					break
 			   else:
-			       print(cor[3]+"\n[!]:Trying Password"+cor[5]+"["+cor[4]+str(loop)+cor[5]+"]  : "+cor[0]+str(passwd))
+			       print(cor[3]+"[-] Trying Password"+cor[5]+"["+cor[4]+str(loop)+cor[5]+"]  : "+cor[0]+str(passwd)+cor[3]+" ===>"+cor[4]+" NO")
 			       loop +=1
+		           lines+=1
 		   else:
-			print(cor[4]+"\n[-]:"+cor[3]+"I WAS TRY ["+cor[4]+str(lens)+cor[3]+"] "+cor[3]+"Passowrd From [ "+cor[4]+wl+cor[3]+" ] Wordlist")
+			print(cor[4]+"\n[-]:"+cor[3]+"I WAS TRY ["+cor[4]+str(lines)+cor[3]+"] "+cor[3]+"Passowrd From [ "+cor[4]+wl+cor[3]+" ] Wordlist")
 			print(cor[4]+"[x!]"+cor[3]+":PASSWORD NOT FOUND IN:[ "+cor[4]+wl+cor[3]+" ] Wordlist\n"+cor[2]+"[*]"+cor[4]+":"+cor[3]+"Try Online Cracker Options Or try Other Wordlist :) ")
-			exit()
+			exit(1)
 
 		except KeyboardInterrupt:
 			       print(cor[3]+"\n[!]:"+cor[4]+"Stoping Attack.....")
 			       sleep(2)
 			       print("Bye :)")
-			       exit()
+			       exit(1)
 
 	elif options.hash !=None and options.dtext !=None:
 		HASH = options.hash
@@ -215,7 +215,7 @@ def main():
                    sleep(0.10)
 		   print("[*]:Text         : "+colors+text+cor[5])
                    sleep(0.10)
-		   print(cor[3]+"\n[*]\033[1;33m Hashing......["+cor[4]+text+"\033[1;33m]\n")
+		   print(cor[3]+"\n[*]\033[1;33m Hashing....["+cor[4]+text+"\033[1;33m]\n")
 		   sleep(2.1)
 		   if HASH == "md5" or HASH == "MD5":
 			  hashte = hashlib.md5(text).hexdigest()
@@ -236,7 +236,7 @@ def main():
 			print("\n\033[1;32m[\033[1;37m*\033[1;32m] \033[1;37mYour Hashing Result Is Saved In :[\033[1;32m {}\033[1;37m ]\033[1;33m Output File. \n\033[1;32m[\033[1;37m*\033[1;32m]\033[1;37m Check Out \033[1;32m:)".format(outfile))
 			file.close()
 		   else:
-			print("\033[1;33m[T]\033[1;35m Plain TEXT\033[1;32m=[ \033[1;34m {}\033[1;32m ] \033[1;33m\n[H] \033[1;36m{}\033[1;32m-hash\033[1;35m=[ \033[1;31m{}\033[1;35m ]\n".format(text,HASH.upper(),hashte))
+			print("\033[1;33m[T]\033[1;35m Plain TEXT\033[1;32m=[\033[1;34m {}\033[1;32m ] \033[1;33m\n[H] \033[1;36m{}\033[1;32m-hash\033[1;35m===[ \033[1;31m{}\033[1;35m ]\n".format(text,HASH.upper(),hashte))
 		else:
 		   errorhash()
 		   exit(1)
@@ -244,28 +244,28 @@ def main():
 	elif options.hash !=None and options.ONC:
               try:
                 import requests
-              except:
+              except ImportError:
 	           print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: [\033[1;32m Requests \033[1;37mLibrary\033[1;33m ] Is Not Exist \033[1;31m!!!")
 	           print("\033[1;32m[\033[1;37m*\033[1;32m]\033[1;37m Please Install It Using This \033[1;33mCommand: \033[1;37mpip install requests")
 		   exit(1)
               try:
                 import json
-              except:
+              except ImportError:
 	           print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: [\033[1;32m Json \033[1;37mLibrary\033[1;33m ] Is Not Exist \033[1;31m!!!")
 	           print("\033[1;32m[\033[1;37m*\033[1;32m]\033[1;37m Please Install It Using This \033[1;33mCommand: \033[1;37mpip install simplejson")
 		   exit(1)
 	      try:
 		 from Core.api import ONCH as onc
-	      except:
+	      except ImportError:
 		 print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: [\033[1;37m Core/api.py \033[1;33m] File Is Missing \033[1;31m !!!")
 		 exit(1)
-	      test = 0
+	      stop = 0
 	      try:
 		H = options.hash
 		HASHES = [32,40,56,64,96,128]
 		if len(H) not in HASHES:
 			errorhash()
-			test+=1
+			stop+=1
 		def check():
 		  try:
 		    ip = socket.gethostbyname('google.com')
@@ -275,7 +275,7 @@ def main():
 			pass
 		  return False
 		if check() !=True:
-			test +=1
+			stop +=1
 			print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Please Check Your Internet Connection \033[1;31m!!!")
 			exit(1)
 		url="http://hashtoolkit.com/reverse-hash?hash="+H
@@ -289,7 +289,7 @@ def main():
 		print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :> [\033[1;32m "+hashname.upper())
 		print("\n\033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :> [\033[1;32m "+cracked[0][1])
 	      except:
-		if test >0:
+		if stop >0:
 		   exit(1)
                 H = options.hash
                 def check():
@@ -324,7 +324,7 @@ def main():
 		except:
 		  print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Cracking Failed \033[1;31m !!!\n\033[1;37m[\033[1;32m*\033[1;37m] Try Brute Force Attack With Wordlist :)")
 
-	elif options.hash !=None and options.Cfile !=None:
+	elif options.hash !=None and options.Cfile !=None:   
              hashname = options.hash
              fname = options.Cfile
              def HASHme(fname,hashname):
