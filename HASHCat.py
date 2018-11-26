@@ -4,13 +4,14 @@
 #--- IMPORT LIB AND MODULES ---#
 #------------------------------#
 try:
+   from os import system
+   system("")
    import hashlib,optparse,re,socket
    from time import sleep
-   from os import system
    from copy import copy
-   system("")
-except ImportError:
-	print("\033[91m[!]\033[32m:Some Modules is Missing In Your\033[m [\033[96mPYTHON\033[m].\n\033[96m[*]\033[91m:\033[32mPlease Update Your Python or redownload ")
+except ImportError as e:
+	e = e[0][16:]
+	print("\033[1;31m[\033[1;33m!\033[1;31m]\033[33m Error: Module[\033[1;37m{}\033[1;33m] Not Found \033[1;31m!!!\n\033[1;37m[\033[1;32m*\033[1;37m]\033[1;33m Please install it :)".format(e))
 	exit(1)
 #------------------------------#
 
