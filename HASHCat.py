@@ -351,13 +351,18 @@ def main():
                 print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :> [\033[1;32m "+H[:30]+"\033[1;33m-...")
                 print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :> [\033[1;32m "+name.upper())
 
-                cracked = hcat.nitrxgen(H)
+                cracked = hcat.leakz(H)
 		if cracked == False:
 		     cracked = hcat.hashtoolkit(H)
 		     if cracked == False:
-		         cracked = hcat.leakz(H)
+		         cracked = hcat.md5decrypt(H)
 			 if cracked == False:
-		            cracked = hcat.md5decrypt(H)
+		            cracked = hcat.nitrxgen(H)
+		            if cracked == False:
+                               cracked = hcat.myaddr(H)
+                               if cracked == False:
+                                  cracked = hcat.gromweb(H)
+                                  
 		if cracked !=False:
 		  if checkfile == True:
 			outfile = options.outfile
