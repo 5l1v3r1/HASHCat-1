@@ -350,19 +350,27 @@ def main():
                 print("\033[1;37m .::: \033[1;33mOnline Cracking \033[1;37m:::.")
                 print("\n\033[1;37m[\033[1;32m>\033[1;37m] HASH     :> [\033[1;32m "+H[:30]+"\033[1;33m-...")
                 print("\033[1;37m[\033[1;32m+\033[1;37m] HashName :> [\033[1;32m "+name.upper())
+                print(cor[2]+"\n[*]"+cor[5]+" Brute Forcing: "+cor[2]+"Enable"+cor[5]+"...\n")
+                sleep(0.60)
+                print("\033[1;32m[\033[1;33m~\033[1;32m] \033[1;33mChecking \033[1;32m6 \033[1;33mWebsites Databases...")
 
                 cracked = hcat.leakz(H)
+                db = 'leakz'
 		if cracked == False:
 		     cracked = hcat.hashtoolkit(H)
+		     db = 'hashtoolkit'
 		     if cracked == False:
 		         cracked = hcat.md5decrypt(H)
+		         db = 'md5decrypt'
 			 if cracked == False:
 		            cracked = hcat.nitrxgen(H)
+		            db = 'nitrxgen'
 		            if cracked == False:
                                cracked = hcat.myaddr(H)
+                               db = 'myaddr'
                                if cracked == False:
                                   cracked = hcat.gromweb(H)
-                                  
+                                  db = 'gromweb'
 		if cracked !=False:
 		  if checkfile == True:
 			outfile = options.outfile
@@ -372,9 +380,11 @@ def main():
 			fop.close()
 			print("\n\033[1;32m[\033[1;37m*\033[1;32m] \033[1;37mYour Hash Online Crack Result Is Saved In :[\033[1;32m {}\033[1;37m ]\033[1;33m Output File. \n\033[1;32m[\033[1;37m*\033[1;32m]\033[1;37m Check Out \033[1;32m:)".format(outfile))
 		  else:
-                       print("\n\033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :> [\033[1;32m "+str(cracked))
+                       print('\n\033[1;32m[\033[1;37m*\033[1;32m] \033[1;37mCracked By [ \033[1;32m{}\033[1;37m ] Database'.format(db))
+                       print("\033[1;33m===================="+'='*len(db)+"==\n  \033[1;37m[\033[1;32m~\033[1;37m] HASH CAT :> [\033[1;32m "+str(cracked))
 		else:
-		  print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Error: Online Cracking Failed \033[1;31m !!!\n\033[1;37m[\033[1;32m*\033[1;37m] Try Brute Force Attack With Wordlist :)")
+                  print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Not Found In [ \033[1;32mLeakz\033[1;33m ] Database\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Not Found In [ \033[1;32mHashtoolkit\033[1;33m ] Database\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Not Found In [ \033[1;32mMD5decrypt\033[1;33m ] Database\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Not Found In [ \033[1;32mNitrxgen\033[1;33m ] Database\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Not Found In [ \033[1;32mMyaddr\033[1;33m ] Database\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Not Found In [ \033[1;32mGromweb\033[1;33m ] Database")
+		  print("\n\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m Online Cracking Failed \033[1;31m !!!\n\033[1;37m[\033[1;32m*\033[1;37m] Try Brute Force Attack With Wordlist :)")
 	      except Exception,e:
 		  print("\n[!] Error:"+str(e.message))
 		  exit(1)
